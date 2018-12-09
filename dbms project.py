@@ -7,47 +7,45 @@ Created on Wed Dec  5 23:21:26 2018
 
 import mysql.connector
 from prettytable import from_db_cursor
-from tkinter import *
 
 
 try:
     db = mysql.connector.connect(
-                host = 'localhost',
+                host = 'HostIPAddr eg. localhost',
                 port = 3306,
-                user = 'root',
-                passwd = 'root',
-                database = 'College',
+                user = 'username',
+                passwd = 'password to connect to mysql server/host',
+                database = 'Your_DB_Name',
                 buffered = True)
     cursor = db.cursor()
     print('Connected to database')
 except:
     db = mysql.connector.connect(
-                host = 'localhost',
+                host = 'HostIPAddr eg. localhost',
                 port = 3306,
-                user = 'root',
-                passwd = 'root',
+                user = 'username',
+                passwd = 'password to connect to mysql server/host',
                 buffered = True)
-    db.cursor().execute('create database College')
+    db.cursor().execute('create database Your_DB_Name')
     db.commit()
-    db.connect(database = 'College')
+    db.connect(database = 'Your_DB_Name')
     cursor=db.cursor()
         
 
 def clear_database():
     global cursor,db
-    cursor.execute('DROP DATABASE College')
+    cursor.execute('DROP DATABASE Your_DB_Name')
   
     
 def create_tables():
     global cursor,db
-    cursor.execute('''create table if not exists Student(
-            USN char(10) not null)''')
+    cursor.execute('''create table samplequery''')
 
 
 if __name__=='__main__':
     #clear_database()
     create_tables()
-    cursor.execute('describe Student')
+    cursor.execute('describe samplequery')
     print(from_db_cursor(cursor))
     
     
